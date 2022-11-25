@@ -12,6 +12,8 @@ namespace Group3_Sis.Data
 
         public DbSet<Studenti> Studentet { get; set; }
         public DbSet<Komuna> Komunat { get; set; }
+        public DbSet<Profesori> Profesoret { get; set; }
+
 
     }
 }
