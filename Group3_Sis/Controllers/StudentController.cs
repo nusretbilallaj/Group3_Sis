@@ -1,6 +1,7 @@
 ﻿using Group3_Sis.Data;
 using Group3_Sis.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Group3_Sis.Controllers
 {
@@ -18,6 +19,22 @@ namespace Group3_Sis.Controllers
            var profesoret = _konteksti.Profesoret.ToList();
 
             return View(studentet);
+        }
+
+        public IActionResult Krijo()
+        {
+           var komunat= _konteksti.Komunat.ToList();
+           var lista = new List<SelectListItem>();
+           foreach (var item in komunat)
+           {
+               var obj = new SelectListItem();
+               obj.Text = item.Emri;
+               obj.Value = item.Id.ToString();
+               lista.Add(obj);
+           }
+
+           ViewBag.Komunat = lista;
+            return View();
         }
     }
 }
