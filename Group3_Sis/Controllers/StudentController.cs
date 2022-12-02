@@ -21,20 +21,50 @@ namespace Group3_Sis.Controllers
             return View(studentet);
         }
 
+        private List<SelectListItem> ListoKomunat()
+        {
+            List<Komuna> komunat = _konteksti.Komunat.ToList();
+            List<SelectListItem> lista = new List<SelectListItem>();
+            foreach (var kom in komunat)
+            {
+                SelectListItem obj = new SelectListItem();
+                obj.Text = kom.Emri;
+                obj.Value = kom.Id.ToString();
+                lista.Add(obj);
+            }
+
+            return lista;
+        }
+
         public IActionResult Krijo()
         {
-           var komunat= _konteksti.Komunat.ToList();
-           var lista = new List<SelectListItem>();
-           foreach (var item in komunat)
-           {
-               var obj = new SelectListItem();
-               obj.Text = item.Emri;
-               obj.Value = item.Id.ToString();
-               lista.Add(obj);
-           }
-
-           ViewBag.Komunat = lista;
+            ViewBag.Komunat = ListoKomunat();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Krijo(Studenti studenti)
+        {
+            if (ModelState.IsValid)
+            {
+                _konteksti.Studentet.Add(studenti);
+                _konteksti.SaveChanges();
+                return RedirectToAction("Listo");
+            }
+            else
+            {
+                ViewBag.Komunat = ListoKomunat();
+                return View(studenti);
+            }
+
+        }
+
+        public IActionResult Ndrysho(int? id)
+        {
+            return View();
+        }
+
     }
 }
+
+

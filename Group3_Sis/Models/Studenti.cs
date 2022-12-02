@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Group3_Sis.Models
 {
@@ -7,12 +8,15 @@ namespace Group3_Sis.Models
     public class Studenti
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Ju lutem shtypeni emrin")]
         public string Emri { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Ju lutem shtypeni mbiemrin")]
         public string Mbiemri { get; set; }
+        [Required(ErrorMessage = "Ju lutem zgjidhni komunen")]
+        [Range(1,30,ErrorMessage = "Specifikoni komunen")]
         public int KomunaId { get; set; }
         [ForeignKey("KomunaId")]
+        [ValidateNever]
         public Komuna Komuna { get; set; }
 
     }
