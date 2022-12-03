@@ -29,11 +29,17 @@
                 <td>@stud.Mbiemri</td>
                 <td>@stud.Komuna.Emri</td>
                 <td>
-                    <div>
-                        <a class="btn btn-secondary" 
+                    <div class="w-75 btn-group">
+                        <a class="btn btn-primary mx-1" 
                            asp-controller="Student" 
                            asp-action="Ndrysho"
-                           asp-route-id="@stud.Id">Ndrysho</a>
+                           asp-route-studentId="@stud.Id">Ndrysho</a>
+                            <a class="btn btn-danger mx-1"
+                           asp-controller="Student"
+                           asp-action="Fshi"
+                           asp-route-studentId="@stud.Id">
+                           Fshi
+                        </a>
                     </div>
                 </td>
             </tr>

@@ -14,6 +14,7 @@ namespace Group3_Sis.Models
         public string Mbiemri { get; set; }
         [Required(ErrorMessage = "Ju lutem zgjidhni komunen")]
         [Range(1,30,ErrorMessage = "Specifikoni komunen")]
+        [Display(Name = "Komuna")]
         public int KomunaId { get; set; }
         [ForeignKey("KomunaId")]
         [ValidateNever]

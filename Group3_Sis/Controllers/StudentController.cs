@@ -58,10 +58,58 @@ namespace Group3_Sis.Controllers
             }
 
         }
-
-        public IActionResult Ndrysho(int? id)
+        [HttpPost]
+        public IActionResult Ndrysho(Studenti stud)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _konteksti.Studentet.Update(stud);
+                _konteksti.SaveChanges();
+                return RedirectToAction("Listo");
+            }
+            else
+            {
+                ViewBag.Komunat = ListoKomunat();
+                return View(stud);
+            }
+        }
+        public IActionResult Ndrysho(int? studentId)
+        {
+            if (studentId==null || studentId==0)
+            {
+                return NotFound();
+            }
+            Studenti stu= _konteksti.Studentet.Find(studentId);
+            if (stu==null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Komunat = ListoKomunat();
+            return View(stu);
+        }
+
+        [HttpPost]
+        public IActionResult Fshi(Studenti stud)
+        {
+            _konteksti.Studentet.Remove(stud);
+                _konteksti.SaveChanges();
+                return RedirectToAction("Listo");
+        }
+        public IActionResult Fshi(int? studentId)
+        {
+            if (studentId == null || studentId == 0)
+            {
+                return NotFound();
+            }
+            Studenti stu = _konteksti.Studentet.Find(studentId);
+            if (stu == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Komunat = ListoKomunat();
+            return View(stu);
         }
 
     }
